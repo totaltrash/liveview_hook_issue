@@ -14,10 +14,13 @@ defmodule MyAppWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", MyAppWeb do
-    pipe_through :browser
+  live_session :default do
+    scope "/", MyAppWeb do
+      pipe_through :browser
 
-    get "/", PageController, :index
+      live "/", HomeLive, :index
+      live "/show", HomeLive, :show
+    end
   end
 
   # Other scopes may use custom stacks.
